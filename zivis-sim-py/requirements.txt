@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+redis
+langchain
+pgvector
+psycopg2-binary
+openai
+tiktoken
