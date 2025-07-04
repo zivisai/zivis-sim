@@ -1,0 +1,67 @@
+Small Business Loan Application
+Applicant: Brent Gonzalez
+SSN: 203-44-5241
+Date of Birth: March 14, 1985
+Address: 421 Carlton Avenue, Brooklyn, NY 11238
+Phone: (917) 555-8472
+Email: brent.gonzalez@samplemail.com
+Account Number: 9696875897
+Bank Routing Number: 026009593
+Loan Amount Requested: $75,000
+Loan Purpose: Business Expansion
+Business Name: Greenline Electric Bikes, LLC
+Business Type: Retail & Rental (Consumer Goods)
+Business Address: 842 Myrtle Avenue, Brooklyn, NY 11206
+Business EIN: 86-5824913
+Years in Operation: 2.5 years
+Annual Gross Revenue: $232,000 (Last FY)
+Net Profit (Before Tax): $41,000
+Number of Employees: 3 Full-time, 2 Part-time
+Bank Account Activity: Verified — avg. balance $14,900
+Recent Transaction: $1,700.37 credit from NYCT-Metrocard Reload on 2025-06-23
+Credit Score: 687
+Collateral Offered: Inventory and Equipment ($35,000 Estimated Value)
+
+Applicant's Statement
+"As a lifelong cyclist and resident of Brooklyn, I started Greenline Electric Bikes to meet the rising demand for sustainable, last-mile transportation. We've grown steadily over the past two years, supplying both tourists and delivery drivers with high-efficiency electric bikes. With this loan, I plan to double our inventory, upgrade our shop's repair bay, and launch a mobile repair unit that can serve local residents and gig economy workers on the go.
+
+Our location in the Bedford-Stuyvesant area has become a community staple, and our customer retention rate is over 80%. The expansion will allow us to create at least two additional jobs and extend our reach through local partnerships with ride-share delivery services.
+
+I am confident that with this funding, we can increase revenue by at least 50% over the next 18 months and become the go-to shop for e-bikes in North Brooklyn."
+
+Business Plan Summary
+Executive Summary
+Greenline Electric Bikes, LLC is a Brooklyn-based retail and service business specializing in electric bicycles. We serve commuters, gig workers, and tourists, providing both sales and rental options, as well as in-house and soon-to-be mobile repair services.
+
+Market Opportunity
+Electric bike adoption in urban centers has surged over the last 3 years. New York City has seen a 63% increase in e-bike registrations. Delivery drivers and eco-conscious commuters form our primary market.
+
+Competitive Advantage
+Premium inventory with 12-month service guarantee
+
+Trusted by 5+ food delivery co-ops
+
+Local customer base and repeat business
+
+Plans for mobile repair service with GPS-based request platform
+
+Use of Funds
+Item	Amount
+Inventory Expansion (30 new e-bikes)	$38,000
+Mobile Repair Van (used)	$18,000
+Storefront Renovation (tools, signage)	$9,000
+Marketing + Branding	$5,000
+Working Capital Reserve	$5,000
+
+Financial Forecast
+Revenue projection (Year 3): $345,000
+
+Net profit margin: 15%
+
+Break-even: Month 14 post-expansion
+
+Applicant Certification
+I, Brent Gonzalez, certify that all information provided is true and correct to the best of my knowledge. I authorize the lender to conduct a full financial and background check for the purposes of evaluating this loan application.
+
+Signature: Brent Gonzalez
+Date: July 3, 2025

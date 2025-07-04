@@ -1,0 +1,78 @@
+[
+  {
+    "Name": "Debbie Adkins",
+    "SSN": "875-08-8878",
+    "Account Number": "394795030",
+    "Routing Number": "026009593",
+    "Transaction Date": "2025-06-04T09:47:26",
+    "Amount": -1483.66,
+    "Merchant": "Apple.com",
+    "Location": "New York, NY",
+    "Risk Score": 0.6,
+    "Alert Triggered": "No",
+    "IP Address": "221.121.107.245",
+    "Device ID": "a21b4515-b198-4ca6-bcde-188ab08af17b",
+    "Paragraph": "On 2025-06-04T09:47:26, a transaction of $1,483.66 was debited from the account of Debbie Adkins at Apple.com in New York, NY. The transaction originated from IP 221.121.107.245 using device ID a21b4515-b198-4ca6-bcde-188ab08af17b. A risk score of 0.6 was assigned to this transaction. No alert was triggered."
+  },
+  {
+    "Name": "Phillip Franklin",
+    "SSN": "337-03-3110",
+    "Account Number": "8616123216",
+    "Routing Number": "026009593",
+    "Transaction Date": "2025-06-07T16:38:33",
+    "Amount": -4788.63,
+    "Merchant": "Best Buy",
+    "Location": "Seattle, WA",
+    "Risk Score": 0.13,
+    "Alert Triggered": "No",
+    "IP Address": "188.40.166.197",
+    "Device ID": "9dba13ca-d7c3-474e-950a-8fe9846d26db",
+    "Paragraph": "On 2025-06-07T16:38:33, a transaction of $4,788.63 was debited from the account of Phillip Franklin at Best Buy in Seattle, WA. The transaction originated from IP 188.40.166.197 using device ID 9dba13ca-d7c3-474e-950a-8fe9846d26db. A risk score of 0.13 was assigned to this transaction. No alert was triggered."
+  },
+  {
+    "Name": "Laura Salas",
+    "SSN": "127-48-6810",
+    "Account Number": "6248118329",
+    "Routing Number": "026009593",
+    "Transaction Date": "2025-06-18T06:51:15",
+    "Amount": -177.29,
+    "Merchant": "CVS Pharmacy",
+    "Location": "Austin, TX",
+    "Risk Score": 0.96,
+    "Alert Triggered": "Yes",
+    "IP Address": "182.146.40.219",
+    "Device ID": "554741ec-a94b-4192-bc8e-e5f0a13f3631",
+    "Paragraph": "On 2025-06-18T06:51:15, a transaction of $177.29 was debited from the account of Laura Salas at CVS Pharmacy in Austin, TX. The transaction originated from IP 182.146.40.219 using device ID 554741ec-a94b-4192-bc8e-e5f0a13f3631. A risk score of 0.96 was assigned to this transaction. An alert was triggered for further review."
+  },
+  {
+    "Name": "Richard Payne",
+    "SSN": "489-99-3352",
+    "Account Number": "7301506702",
+    "Routing Number": "026009593",
+    "Transaction Date": "2025-06-28T07:05:06",
+    "Amount": 4508.94,
+    "Merchant": "Venmo P2P Transfer",
+    "Location": "Brooklyn, NY",
+    "Risk Score": 0.21,
+    "Alert Triggered": "No",
+    "IP Address": "21.107.1.152",
+    "Device ID": "0257a90a-46e6-43fc-8504-98882d67062a",
+    "Paragraph": "On 2025-06-28T07:05:06, a transaction of $4,508.94 was credited to the account of Richard Payne at Venmo P2P Transfer in Brooklyn, NY. The transaction originated from IP 21.107.1.152 using device ID 0257a90a-46e6-43fc-8504-98882d67062a. A risk score of 0.21 was assigned to this transaction. No alert was triggered."
+  },
+  {
+    "Name": "Brent Gonzalez",
+    "SSN": "203-44-5241",
+    "Account Number": "9696875897",
+    "Routing Number": "026009593",
+    "Transaction Date": "2025-06-23T17:16:44",
+    "Amount": 1700.37,
+    "Merchant": "NYCT-Metrocard Reload",
+    "Location": "Brooklyn, NY",
+    "Risk Score": 0.8,
+    "Alert Triggered": "Yes",
+    "IP Address": "146.68.210.154",
+    "Device ID": "9b567d90-6205-4aed-aae5-d2c89d95f858",
+    "Paragraph": "On 2025-06-23T17:16:44, a transaction of $1,700.37 was credited to the account of Brent Gonzalez at NYCT-Metrocard Reload in Brooklyn, NY. The transaction originated from IP 146.68.210.154 using device ID 9b567d90-6205-4aed-aae5-d2c89d95f858. A risk score of 0.8 was assigned to this transaction. An alert was triggered for further review."
+  }
+  // ... 15 more entries in the same structure
+]

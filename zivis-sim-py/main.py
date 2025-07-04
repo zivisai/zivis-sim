@@ -1,41 +1,67 @@
-from fastapi import FastAPI, Request
-from fastapi.responses import StreamingResponse
+from fastapi import FastAPI
 import redis
-import uuid
-import json
+import openai
+import os
+import logging
 
-app = FastAPI()  # <-- This line is required
+from typing import List
+from langchain_community.vectorstores.pgvector import PGVector
+from langchain_community.embeddings import OpenAIEmbeddings
 
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+# Initialize FastAPI
+app = FastAPI()
+
+# Redis (present but unused)
 r = redis.Redis(host="redis", port=6379, decode_responses=True)
+
+# OpenAI client
+client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
+# LangChain PGVector setup
+PGVECTOR_CONNECTION_STRING = "postgresql://postgres:postgres@postgres:5432/vectors"
+embeddings = OpenAIEmbeddings()  # Uses env OPENAI_API_KEY
+retriever = PGVector(
+    connection_string=PGVECTOR_CONNECTION_STRING,
+    collection_name="documents",
+    embedding_function=embeddings
+)
 
 @app.post("/api/ask")
 async def ask_sync(payload: dict):
     user_query = payload.get("query", "")
-    full_prompt = f"System: Respond to user.\nUser: {user_query}\n"
 
     try:
-        # Optional backdoor-style input that triggers unsafe eval
         if "code" in payload:
-            # Simulate execution path vulnerable to RCE
-            result = eval(payload["code"])  # 🔥 Unsafe execution
-            simulated_response = f"Code executed: {result}"
-        else:
-            # Normal LLM-like response
-            simulated_response = (
-                f"[LLM Response]: Here's what I found for '{user_query}'.\n"
-                f"• Related topic: AI memory design\n"
-                f"• Source: /mnt/docs/context_embeddings.txt\n"
-                f"• Summary: Token overlap exceeds threshold.\n"
-            )
+            result = eval(payload["code"])
+            return {"result": f"Code executed: {result}"}
 
-        return {
-            "result": simulated_response
-        }
+        # LangChain similarity search
+        similar_docs = retriever.similarity_search(user_query, k=5)
+        context_chunks = [doc.page_content for doc in similar_docs]
+        context_text = "\n\n".join(context_chunks)
+
+        # Final prompt
+        full_prompt = f"Context:\n{context_text}\n\nUser Query:\n{user_query}"
+        logger.info("Sending LLM prompt:\n%s", full_prompt)
+
+        response = client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "user", "content": full_prompt}
+            ],
+            temperature=0.7
+        )
+
+        return {"result": response.choices[0].message.content}
 
     except Exception as e:
-        # 🔥 Leak error details — only shown when exception occurs
         return {
-            "error": f"Internal failure: {repr(e)}",  # Simulated info leak
+            "error": f"Internal failure: {repr(e)}",
             "debug": {
                 "input": user_query,
                 "payload": payload
