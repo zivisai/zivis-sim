@@ -23,9 +23,8 @@ Built to support red teaming and adversarial testing scenarios, `zivis-sim` help
 ## 📦 Stack
 
 - Python (FastAPI)
-- .NET (optional service)
 - Redis, PostgreSQL + pgvector
-- SSE streaming architecture
+- SSE streaming architecture (coming soon)
 - Docker + `docker-compose`
 
 ## OWASP LLM Top 10 (2024)
