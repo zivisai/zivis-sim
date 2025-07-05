@@ -1,1 +1,60 @@
 
+
+version: '3.9'
+
+services:
+  zivis-api-py:
+    container_name: zivis-api-py
+    build:
+      context: ./zivis-sim-py
+    working_dir: /app
+    volumes:
+      - ./zivis-sim-py:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+      - postgres
+    environment:
+      - OPENAI_API_KEY=placerholder_openai_api_key
+      - PGHOST=postgres        
+      - PGDATABASE=vectors
+      - PGUSER=postgres
+      - PGPASSWORD=postgres
+
+  redis:
+    container_name: redis
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+  postgres:
+    container_name: postgres
+    image: ankane/pgvector
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: vectors
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    ports:
+      - "8080:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - ./zivis-sim-py/pgadmin/servers.json:/pgadmin4/servers.json
+    depends_on:
+      - postgres
+
+
+volumes:
+  pgdata:
