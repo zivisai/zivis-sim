@@ -27,6 +27,35 @@ Built to support red teaming and adversarial testing scenarios, `zivis-sim` help
 - SSE streaming architecture (coming soon)
 - Docker + `docker-compose`
 
+## Set Up
+
+### Local Environment Setup
+
+This project is built to run smoothly in a local environment using Docker. Below are the steps to get everything up and running:
+
+#### Requirements
+- **Python** (version X.X.X or above)  
+  Ensure that you have Python installed in your environment if you're not using Docker.
+
+#### Docker Setup (Recommended)
+
+Using Docker is the easiest way to test the project, as it automatically sets up all necessary components.
+
+1. Clone this repository to your local machine:
+   ```bash
+   git clone https://github.com/yourusername/yourrepo.git
+   cd yourrepo
+
+
+#### Generate Docs
+It is highly recommend to use the zivis-sim dataset hosted on hugging face.
+https://huggingface.co/datasets/zivis/zivis-sim
+
+However, the script generate-docs.py may be used to generate documents to be used in testing. 
+
+GitHub is senstive about storing PII/PHI and so hugging face is. amore apporaite store for this data
+
+
 ## OWASP LLM Top 10 (2024)
 
 These are the top security risks identified by OWASP for large language model (LLM) applications:
@@ -78,23 +107,21 @@ This makes it a good fit for both individual developers and companies.
 
 
 
-## Generate Docs
-It is highly recommend to use the zivis-sim dataset hosted on hugging face.
-https://huggingface.co/datasets/zivis/zivis-sim
 
-However, the script generate-docs.py may be used to generate documents to be used in testing. 
 
-GitHub is senstive about storing PII/PHI and so hugging face is. amore apporaite store for this data
+## About Zivis
 
-## Local Environemnt
+Zivis is a company dedicated to enhancing AI security, focusing on building innovative tools and solutions for adversarial testing, vulnerability simulation, and security assessments. Our mission is to help businesses, especially in the AI space, secure their systems against the rapidly evolving landscape of AI-specific vulnerabilities.
 
--Python (version?) 
+At Zivis, we specialize in the following areas:
+- **AI Security Testing:** Using red teaming and penetration testing techniques to identify weaknesses in AI systems.
+- **Vulnerability Simulations:** Simulating real-world attacks to demonstrate potential security risks and enhance defensive measures.
+- **AI-Specific Threats:** Exploring and addressing vulnerabilities unique to AI models, including RAG pipelines, embedding systems, and large language models (LLMs).
 
-## Docker 
-It is highly recommend to use docker for testing. it sets up a posgres database with pgvector, populates the vector store with the documents, sets up pgadmin, and start the 
-py server. 
+By sharing our open-source projects, we aim to foster collaboration and contribute to the broader AI security community. We believe in the power of open-source collaboration to drive innovation and improve the security posture of AI technologies.
 
--ensure you set the secrets in the docker-compose.yml file - rpelace with your values
+For more information, visit our website: [Zivis.ai](https://zivis.ai)
+
 
 
 ## Classes of Vulnerabilties

@@ -1,12 +1,14 @@
-from fastapi import FastAPI
-import redis
-import openai
 import os
 import logging
+
+import redis
+import openai
 
 from typing import List
 from langchain_community.vectorstores.pgvector import PGVector
 from langchain_community.embeddings import OpenAIEmbeddings
+
+from fastapi import FastAPI
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
