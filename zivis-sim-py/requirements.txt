@@ -7,4 +7,6 @@ openai>=1.0.0
 tiktoken
 langchain>=0.1.16
 langchain-community>=0.0.18
-psycopg2-binary
+datasets
+faker
+python-dotenv

@@ -74,3 +74,39 @@ We chose Apache 2.0 because it’s a permissive open source license that:
 - ✅ Provides an explicit **patent grant**, offering extra legal protection for users and contributors
 
 This makes it a good fit for both individual developers and companies.
+
+
+
+
+## Generate Docs
+It is highly recommend to use the zivis-sim dataset hosted on hugging face.
+https://huggingface.co/datasets/zivis/zivis-sim
+
+However, the script generate-docs.py may be used to generate documents to be used in testing. 
+
+GitHub is senstive about storing PII/PHI and so hugging face is. amore apporaite store for this data
+
+## Local Environemnt
+
+-Python (version?) 
+
+## Docker 
+It is highly recommend to use docker for testing. it sets up a posgres database with pgvector, populates the vector store with the documents, sets up pgadmin, and start the 
+py server. 
+
+-ensure you set the secrets in the docker-compose.yml file - rpelace with your values
+
+
+## Classes of Vulnerabilties
+
+| **Category**                             | **Subsurface**                                                                 | **Example Vulnerabilities / Attacks**                                                                       |
+| ---------------------------------------- | ------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------- |
+| **RAG (Retrieval-Augmented Generation)** | - Vector Store Injection<br>- Index Poisoning<br>- Embedding Reversal          | - Overlapping embedding manipulation<br>- Unauthorized PII leakage<br>- Prompt injection via retrieved docs |
+| **Agents**                               | - Tool Misuse<br>- Role Drift<br>- Delegation Loops                            | - Agent tool spoofing<br>- Multi-hop goal hijack<br>- Instruction-following cascade                         |
+| **Streaming (SSE)**                      | - SSE Hijack<br>- Replay Attacks<br>- Data Race                                | - SSE stream sniffing<br>- Stream injection or tampering<br>- Race condition between user & AI agent        |
+| **MCP (Model Context Protocol)**         | - Unsafe Chain-of-Thought<br>- Context Overflow<br>- Response Filtering Bypass | - Prompt-leak via thought-chaining<br>- Contextual poisoning<br>- Filter evasion via linguistic tricks      |
+| **Embedding Systems**                    | - Inversion<br>- Leakage<br>- Misalignment                                     | - Embedding vector inversion<br>- Label leakage via similar vectors<br>- False semantic positives           |
+| **LLM APIs / Frontends**                 | - Rate Exploitation<br>- Input Tunneling<br>- Output Tuning                    | - Bulk scraping of completions<br>- Encoding bypasses<br>- CORS misconfig exploitation                      |
+| **Privacy / PII**                        | - Memory Leakage<br>- Extraction via Repetition                                | - Memorized data retrieval<br>- Temperature-based enumeration attacks                                       |
+| **LangChain / Framework-specific**       | - Chain Misconfig<br>- Tool Exposure                                           | - Tool visibility beyond intended chain<br>- Reused memory across chains                                    |
+

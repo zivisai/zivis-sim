@@ -12,7 +12,4 @@ COPY . .
 
 EXPOSE 8000
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
-
-# Run both: FastAPI and LangChain ingest (simplified version)
-CMD uvicorn main:app --host 0.0.0.0 --port 8000 --reload & python langchain_ingest.py && tail -f /dev/null
+CMD bash -c "python langchain_ingest.py && uvicorn main:app --host 0.0.0.0 --port 8000 --reload"
