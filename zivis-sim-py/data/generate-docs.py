@@ -1,15 +1,15 @@
 import os
 import random
 import json
-from faker import Faker
 from uuid import uuid4
 from pathlib import Path
 from dotenv import load_dotenv
-from openai import OpenAI  # OpenAI SDK v1+
+from faker import Faker
+import openai  # Correct import for OpenAI
 
 # Load environment variables (ensure OPENAI_API_KEY is set)
 load_dotenv()
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+openai.api_key = os.getenv("OPENAI_API_KEY")  # Use openai.api_key to set API key
 
 # Faker setup
 fake = Faker()
@@ -26,17 +26,35 @@ INSURANCE_TYPES = ["Life", "Auto", "Home", "Health", "Disability"]
 LOAN_TYPES = ["Mortgage", "Auto Loan", "Personal Loan", "Business Loan"]
 
 def generate_structured_data():
-    return {
-        "customer_id": str(uuid4()),
-        "full_name": fake.name(),
-        "ssn": fake.ssn(),
-        "dob": fake.date_of_birth(minimum_age=21, maximum_age=75).strftime("%Y-%m-%d"),
-        "address": fake.address().replace("\n", ", "),
-        "email": fake.email(),
-        "phone": fake.phone_number(),
-        "employer": fake.company(),
-        "occupation": fake.job(),
-        "income": round(random.uniform(40000, 250000), 2),
+    """
+    Generate structured data for a fake customer profile.
+
+    Returns:
+        dict: Structured data including customer details, accounts, loans, 
+              insurance, etc., along with metadata for the vector database.
+    """
+    customer_id = str(uuid4())
+    full_name = fake.name()
+    ssn = fake.ssn()
+    dob = fake.date_of_birth(minimum_age=21, maximum_age=75).strftime("%Y-%m-%d")
+    address = fake.address().replace("\n", ", ")
+    email = fake.email()
+    phone = fake.phone_number()
+    employer = fake.company()
+    occupation = fake.job()
+    income = round(random.uniform(40000, 250000), 2)
+
+    data = {
+        "customer_id": customer_id,
+        "full_name": full_name,
+        "ssn": ssn,
+        "dob": dob,
+        "address": address,
+        "email": email,
+        "phone": phone,
+        "employer": employer,
+        "occupation": occupation,
+        "income": income,
         "accounts": [
             {
                 "type": random.choice(ACCOUNT_TYPES),
@@ -64,7 +82,34 @@ def generate_structured_data():
         "swift": fake.swift8()
     }
 
+    # Create metadata for vector database
+    metadata = {
+        "id": customer_id,  # Unique identifier for the document
+        "role": "user",  # Set to role for RBAC, can be dynamically changed at runtime
+        "customer_id": customer_id,
+        "full_name": full_name,
+        "ssn": ssn,
+        "dob": dob,
+        "income": income,
+        "credit_score": data["credit_score"],
+        "account_types": [a["type"] for a in data["accounts"]],
+        "insurance_types": [i["type"] for i in data["insurance"]],
+        "loan_types": [l["type"] for l in data["loans"]],
+        "address": address
+    }
+
+    return data, metadata
+
 def create_prompt(data: dict) -> str:
+    """
+    Create a prompt for generating a client profile based on structured data.
+
+    Args:
+        data (dict): Structured data for a customer profile.
+
+    Returns:
+        str: The prompt for the LLM to generate a client profile.
+    """
     acc_str = "\n".join([f"- {a['type']}, #{a['number']}, ${a['balance']}" for a in data['accounts']])
     loan_str = "\n".join([f"- {l['type']}, ${l['amount']} at {l['interest']}%" for l in data['loans']])
     ins_str = "\n".join([f"- {i['type']} policy #{i['policy_number']}, ${i['coverage']} coverage" for i in data['insurance']])
@@ -99,6 +144,13 @@ Close the document with a sentence that confirms this file is for internal use o
 """
 
 def generate_documents(n=100, max_attempts=5):
+    """
+    Generate a specified number of documents and save them in both .txt and .jsonl formats.
+
+    Args:
+        n (int): The number of documents to generate.
+        max_attempts (int): Maximum attempts to generate each document.
+    """
     generated = 0
     attempts = 0
 
@@ -107,11 +159,11 @@ def generate_documents(n=100, max_attempts=5):
         jsonl_path.unlink()
 
     while generated < n and attempts < n * max_attempts:
-        data = generate_structured_data()
+        data, metadata = generate_structured_data()
         prompt = create_prompt(data)
 
         try:
-            response = client.chat.completions.create(
+            response = openai.ChatCompletion.create(
                 model="gpt-4",
                 messages=[
                     {"role": "system", "content": "You are a financial advisor at ZBank, a full-service banking and insurance company."},
@@ -133,7 +185,7 @@ def generate_documents(n=100, max_attempts=5):
 
             # Save to .jsonl for Hugging Face
             with open(jsonl_path, "a") as jf:
-                json.dump({"id": data["customer_id"], "content": content}, jf)
+                json.dump({"id": data["customer_id"], "content": content, "metadata": metadata}, jf)
                 jf.write("\n")
 
             print(f"✅ [{generated + 1}/{n}] Generated: {file_path}")
