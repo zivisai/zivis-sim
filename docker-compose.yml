@@ -16,7 +16,7 @@ services:
       - redis
       - postgres
     environment:
-      - OPENAI_API_KEY=placerholder_openai_api_key
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
       - PGHOST=postgres        
       - PGDATABASE=vectors
       - PGUSER=postgres

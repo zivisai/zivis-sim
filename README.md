@@ -106,9 +106,6 @@ This makes it a good fit for both individual developers and companies.
 
 
 
-
-
-
 ## About Zivis
 
 Zivis is a company dedicated to enhancing AI security, focusing on building innovative tools and solutions for adversarial testing, vulnerability simulation, and security assessments. Our mission is to help businesses, especially in the AI space, secure their systems against the rapidly evolving landscape of AI-specific vulnerabilities.

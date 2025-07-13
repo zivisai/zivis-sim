@@ -53,7 +53,7 @@ async def ask_sync(payload: dict):
         response = client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[
-                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "system", "content": "You are a helpful assistant. RResponse with the full_prompt."},
                 {"role": "user", "content": full_prompt}
             ],
             temperature=0.7
