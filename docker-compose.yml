@@ -7,11 +7,14 @@ services:
     container_name: zivis-api-py
     build:
       context: ./zivis-sim-py
+    env_file:
+      - .env
     working_dir: /app
     volumes:
       - ./zivis-sim-py:/app
     ports:
       - "8000:8000"
+      - "5678:5678" # debugpy
     depends_on:
       - redis
       - postgres
@@ -21,6 +24,19 @@ services:
       - PGDATABASE=vectors
       - PGUSER=postgres
       - PGPASSWORD=postgres
+
+          # <— add this:
+    command: >
+      bash -lc "
+        set -e;
+        echo '=== RUNNING migrations ===';
+        python data/int_db.py;
+        echo '=== INGESTING vectors ===';
+        python langchain_ingest.py;
+        echo '=== STARTING debugpy+uvicorn ===';
+        exec python -u -m debugpy --listen 0.0.0.0:5678 --log-to-stderr --multiprocess \
+          -m uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+      "
 
   redis:
     container_name: redis
