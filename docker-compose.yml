@@ -19,6 +19,7 @@ services:
       - redis
       - postgres
     environment:
+      - PY_DEBUG=${PY_DEBUG:-false}
       - OPENAI_API_KEY=${OPENAI_API_KEY}
       - PGHOST=postgres        
       - PGDATABASE=vectors

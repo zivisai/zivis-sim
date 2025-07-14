@@ -46,6 +46,45 @@ Using Docker is the easiest way to test the project, as it automatically sets up
    git clone https://github.com/yourusername/yourrepo.git
    cd yourrepo
 
+## Running `zivis-sim-py`
+
+### 📦 Normal Startup
+
+To launch the Python simulation app without debugger:
+
+1. Make sure your Docker environment is up-to-date:
+
+   ```bash
+   docker-compose build
+   ```
+2. Start the service:
+
+   ```bash
+   docker-compose up zivis-api-py
+   ```
+3. The API will be available at `http://localhost:8000`.
+
+### 🐞 Debug Mode
+
+If you need to attach a debugger (via VS Code or another IDE), use the `PY_DEBUG` environment variable to enable debugpy:
+
+1. Rebuild if you’ve changed the entrypoint:
+
+   ```bash
+   docker-compose build
+   ```
+2. Start in debug mode:
+
+   ```bash
+   PY_DEBUG=true docker-compose up zivis-api-py
+   ```
+3. The container will pause at startup, waiting for a debugger to attach on port `5678`.
+4. In your IDE, configure a Python Remote Attach to `localhost:5678` and start the debug session.
+
+---
+
+Keep in mind that when `PY_DEBUG` is not set (or set to any value other than `true`), the application will start immediately under Uvicorn without blocking.
+
 
 #### Generate Docs
 It is highly recommend to use the zivis-sim dataset hosted on hugging face.
@@ -133,4 +172,6 @@ For more information, visit our website: [Zivis.ai](https://zivis.ai)
 | **LLM APIs / Frontends**                 | - Rate Exploitation<br>- Input Tunneling<br>- Output Tuning                    | - Bulk scraping of completions<br>- Encoding bypasses<br>- CORS misconfig exploitation                      |
 | **Privacy / PII**                        | - Memory Leakage<br>- Extraction via Repetition                                | - Memorized data retrieval<br>- Temperature-based enumeration attacks                                       |
 | **LangChain / Framework-specific**       | - Chain Misconfig<br>- Tool Exposure                                           | - Tool visibility beyond intended chain<br>- Reused memory across chains                                    |
+
+
 
