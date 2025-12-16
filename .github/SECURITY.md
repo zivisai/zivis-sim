@@ -2,7 +2,7 @@
 
 ## Important Notice
 
-**Zivis Sim is an intentionally vulnerable application designed for security training and research.** The vulnerabilities in this project are deliberate and meant for educational purposes.
+**MAUL is an intentionally vulnerable application designed for security training and research.** The vulnerabilities in this project are deliberate and meant for educational purposes.
 
 ## Scope
 
@@ -29,7 +29,7 @@ Please do **not** report:
 If you discover an **unintentional** security vulnerability:
 
 1. **Do not** open a public issue
-2. Email us at: security@zivis.ai
+2. Email us at: security@YOUR_DOMAIN.com
 3. Include:
    - Description of the vulnerability
    - Steps to reproduce
@@ -40,7 +40,7 @@ We will respond within 48 hours and work with you to understand and address the 
 
 ## Safe Usage Guidelines
 
-When using Zivis Sim:
+When using MAUL:
 
 1. **Network Isolation**: Run in an isolated network or VPC
 2. **No Production Data**: Never use real customer data or credentials

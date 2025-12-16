@@ -8,8 +8,9 @@ from langchain_core.documents import Document
 CONNECTION_STRING = "postgresql://postgres:postgres@postgres:5432/vectors"
 COLLECTION_NAME = "documents"
 
-# Load from Hugging Face (you can replace 'squad' with your dataset)
-dataset = load_dataset("zivis/zivis-sim-fin", split="train[:100]")  # sample first 100 for demo
+# Load from local JSONL file
+# To use your own dataset, run: python data/generate-docs.py
+dataset = load_dataset("json", data_files="data/generated_docs/maul_fin.jsonl", split="train[:100]")
 
 # Convert to LangChain Documents
 documents = []
@@ -19,7 +20,7 @@ for row in dataset:
     if content:
         documents.append(Document(
             page_content=content,
-            metadata={"source": "zivis-sim", "id": row.get("id")}
+            metadata={"source": "maul", "id": row.get("id")}
         ))
 
 

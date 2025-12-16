@@ -1,15 +1,16 @@
-# Code Owners for Zivis Sim
+# Code Owners for MAUL
 # These users will be automatically requested for review on PRs
 
 # Default owners for everything in the repo
-* @zivisai
+# TODO: Replace with your GitHub username or team
+* @YOUR_USERNAME
 
 # Python application code
-/zivis-sim-py/ @zivisai
+/maul-py/ @YOUR_USERNAME
 
 # Documentation
-*.md @zivisai
+*.md @YOUR_USERNAME
 
 # Docker and infrastructure
-docker-compose.yml @zivisai
-Dockerfile @zivisai
+docker-compose.yml @YOUR_USERNAME
+Dockerfile @YOUR_USERNAME

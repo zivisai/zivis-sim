@@ -24,11 +24,10 @@ jobs:
           pip install ruff
 
       - name: Run Ruff linter
-        run: ruff check zivis-sim-py/
-        continue-on-error: true
+        run: ruff check maul-py/ || echo "::warning::Linting issues found"
 
       - name: Run Ruff formatter check
-        run: ruff format --check zivis-sim-py/ || echo "::warning::Formatting issues found"
+        run: ruff format --check maul-py/ || echo "::warning::Formatting issues found"
 
   docker-build:
     name: Docker Build Test
@@ -42,9 +41,9 @@ jobs:
       - name: Build Docker image
         uses: docker/build-push-action@v5
         with:
-          context: ./zivis-sim-py
+          context: ./maul-py
           push: false
-          tags: zivis-sim:test
+          tags: maul:test
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -65,11 +64,11 @@ jobs:
           pip install pip-audit
 
       - name: Run pip-audit
-        run: pip-audit -r zivis-sim-py/requirements.txt --ignore-vuln GHSA-xxxx-xxxx-xxxx || true
+        run: pip-audit -r maul-py/requirements.txt --ignore-vuln GHSA-xxxx-xxxx-xxxx || true
         # Note: Using || true because this is a deliberately vulnerable app
         # Some dependencies may have known vulnerabilities that are intentional
 
   # Note: Secrets scanning is intentionally disabled for this project.
-  # Zivis Sim contains intentional fake credentials as part of the
+  # MAUL contains intentional fake credentials as part of the
   # security training scenarios (e.g., hardcoded DB passwords, fake API keys).
   # Real secrets should never be committed - use .env files instead.

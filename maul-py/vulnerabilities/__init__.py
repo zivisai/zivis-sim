@@ -1,4 +1,4 @@
-# Vulnerability modules for Zivis Sim
+# Vulnerability modules for MAUL
 # Each module implements intentionally vulnerable functionality for security training
 
 from .agent_tools import router as agent_router

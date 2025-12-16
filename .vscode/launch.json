@@ -6,13 +6,13 @@
             "type": "python",
             "request": "attach",
             "connect": {
-                "host": "localhost", // or the Docker host IP
+                "host": "localhost",
                 "port": 5678
             },
             "pathMappings": [
                 {
-                    "localRoot": "${workspaceFolder}/zivis-sim-py", // your project on host
-                    "remoteRoot": "/app" // match the WORKDIR in your Dockerfile
+                    "localRoot": "${workspaceFolder}/maul-py",
+                    "remoteRoot": "/app"
                 }
             ]
         }

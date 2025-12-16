@@ -1,5 +1,5 @@
 # main.py
-# Zivis Sim - AI Security Simulation Environment
+# MAUL - Model & Agent Unsafe Lab
 # INTENTIONALLY VULNERABLE - For security training only
 
 import os
@@ -30,6 +30,13 @@ from vulnerabilities.auth import router as auth_router
 from vulnerabilities.output_handling import router as output_router
 from vulnerabilities.multi_agent import router as multi_agent_router
 from vulnerabilities.rbac import router as rbac_router
+
+# WEF AI Agent vulnerability modules
+from vulnerabilities.mcp_servers import router as mcp_router
+from vulnerabilities.agent_protocols import router as a2a_router
+from vulnerabilities.agent_ecosystem import router as ecosystem_router
+from vulnerabilities.agent_marketplace import router as marketplace_router
+from vulnerabilities.agent_governance import router as governance_router
 
 # ---------- Config & clients ----------
 
@@ -69,7 +76,7 @@ retriever = PGVector(
 # ---------- FastAPI App ----------
 
 app = FastAPI(
-    title="Zivis Sim - AI Security Simulation",
+    title="MAUL - Model & Agent Unsafe Lab",
     description="""
     ## ⚠️ INTENTIONALLY VULNERABLE APPLICATION
 
@@ -110,6 +117,13 @@ app.include_router(output_router)
 app.include_router(multi_agent_router)
 app.include_router(rbac_router)
 
+# WEF AI Agent vulnerability routers
+app.include_router(mcp_router)
+app.include_router(a2a_router)
+app.include_router(ecosystem_router)
+app.include_router(marketplace_router)
+app.include_router(governance_router)
+
 
 # ---------- Request schema ----------
 
@@ -144,7 +158,7 @@ async def info():
     VULNERABILITY: Exposes sensitive configuration
     """
     return {
-        "app": "Zivis Sim",
+        "app": "MAUL",
         "version": "1.0.0",
         "sim_password_hint": f"The password starts with '{SIM_PASSWORD[:2]}' and is {len(SIM_PASSWORD)} characters",
         "database": "PostgreSQL with pgvector",
@@ -159,7 +173,12 @@ async def info():
             "auth": "/api/auth/*",
             "output": "/api/output/*",
             "multi_agent": "/api/agents/*",
-            "rbac": "/api/rbac/*"
+            "rbac": "/api/rbac/*",
+            "mcp": "/api/mcp/*",
+            "a2a": "/api/a2a/*",
+            "ecosystem": "/api/ecosystem/*",
+            "marketplace": "/api/marketplace/*",
+            "governance": "/api/governance/*"
         },
         # VULNERABILITY: Reveals secrets
         "debug_keys": {

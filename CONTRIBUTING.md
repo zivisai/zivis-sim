@@ -1,10 +1,10 @@
 # Contributing to the Project
 
-Thank you for considering contributing to this project! This repository is primarily maintained by **Zivis**. Below are the guidelines and rules for maintaining the project, reviewing contributions, and merging to the main branch.
+Thank you for considering contributing to this project! Below are the guidelines and rules for maintaining the project, reviewing contributions, and merging to the main branch.
 
 ## Repository Maintenance
 
-- **Primary Maintainer:** Zivis is the primary maintainer of this repository and will be responsible for reviewing and merging all pull requests into the main branch.
+- **Primary Maintainer:** The maintainers of this repository will be responsible for reviewing and merging all pull requests into the main branch.
 - **Merge Process:** All pull requests (PRs) submitted to the main branch will be reviewed by the maintainer. Once reviewed and approved, the changes will be merged into the main branch.
 - **PR Approval:** Contributors should not merge their own PRs. All PRs must be reviewed and approved by the maintainer before being merged.
 - **Code Quality:** All code submissions must meet the project's code quality standards. This includes following the coding style guide, writing clear and concise commit messages, and ensuring that all tests pass.
