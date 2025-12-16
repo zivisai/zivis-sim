@@ -20,7 +20,7 @@ Faker.seed(42)
 # Output directory
 OUTPUT_DIR = Path("generated_docs")
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-jsonl_path = OUTPUT_DIR / "zivis_sim.jsonl"
+jsonl_path = OUTPUT_DIR / "maul.jsonl"
 
 # Constants
 ACCOUNT_TYPES = ["Checking", "Savings", "Retirement", "Investment"]

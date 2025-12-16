@@ -1,8 +1,8 @@
-# Zivis Sim - AI Security Simulation Environment
+# MAUL - Model & Agent Unsafe Lab
 
 ## Complete Project Documentation
 
-**Zivis Sim** is an open-source, deliberately vulnerable AI application designed for penetration testing training, security research, and educational demonstrations of AI-specific vulnerabilities.
+**MAUL** is an open-source, deliberately vulnerable AI application designed for penetration testing training, security research, and educational demonstrations of AI-specific vulnerabilities.
 
 ---
 
@@ -23,9 +23,9 @@
 
 ## Overview
 
-### What is Zivis Sim?
+### What is MAUL?
 
-Zivis Sim is a **purpose-built vulnerable AI application** that simulates real-world security flaws found in LLM-powered systems. It provides a safe, legal environment for:
+MAUL is a **purpose-built vulnerable AI application** that simulates real-world security flaws found in LLM-powered systems. It provides a safe, legal environment for:
 
 - **Security professionals** learning AI penetration testing
 - **Developers** understanding how to avoid AI security pitfalls
@@ -48,13 +48,13 @@ Zivis Sim is a **purpose-built vulnerable AI application** that simulates real-w
 ### Project Structure
 
 ```
-zivis-sim/
+maul/
 ├── docker-compose.yml          # Multi-container orchestration
 ├── .env.example                # Environment template
 ├── README.md                   # Project overview
 ├── CONTRIBUTING.md             # Contribution guidelines
 ├── LICENSE                     # Apache 2.0
-└── zivis-sim-py/               # Main application
+└── maul-py/                    # Main application
     ├── Dockerfile              # Container definition
     ├── requirements.txt        # Python dependencies
     ├── main.py                 # FastAPI application
@@ -71,7 +71,12 @@ zivis-sim/
     │   ├── auth.py             # Authentication flaws
     │   ├── output_handling.py  # Output handling issues
     │   ├── multi_agent.py      # Multi-agent system
-    │   └── rbac.py             # Authorization bypass
+    │   ├── rbac.py             # Authorization bypass
+    │   ├── mcp_servers.py      # MCP protocol vulnerabilities
+    │   ├── agent_protocols.py  # A2A protocol vulnerabilities
+    │   ├── agent_ecosystem.py  # Multi-agent ecosystem
+    │   ├── agent_marketplace.py # Agent registry/marketplace
+    │   └── agent_governance.py # Governance bypass
     └── data/
         ├── int_db.py           # Database schema
         └── generate-docs.py    # Synthetic data generator
@@ -89,8 +94,8 @@ zivis-sim/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/zivisai/zivis-sim.git
-cd zivis-sim
+git clone https://github.com/YOUR_USERNAME/maul.git
+cd maul
 ```
 
 ### 2. Configure Environment
@@ -187,6 +192,25 @@ docker-compose up
 | Multi-Agent | multi_agent.py | Agent trust and communication |
 | XSS | output_handling.py | Cross-site scripting |
 | SSRF | agent_tools.py, document_upload.py | Server-side request forgery |
+
+### WEF AI Agent Vulnerabilities (2025)
+
+Based on the [World Economic Forum "AI Agents in Action" report](https://www.weforum.org/publications/ai-agents-in-action-foundations-for-evaluation-and-governance-2025/), the following agentic AI-specific vulnerability categories are implemented:
+
+| Category | Module | Description |
+|----------|--------|-------------|
+| MCP Protocol Exploits | mcp_servers.py | Model Context Protocol server injection, tool boundary violations |
+| A2A Protocol Attacks | agent_protocols.py | Agent-to-Agent protocol vulnerabilities, identity spoofing |
+| Orchestration Drift | agent_ecosystem.py | Multi-agent coordination failures, semantic misalignment |
+| Cascading Failures | agent_ecosystem.py | Systemic risk propagation across agent networks |
+| Goal Misalignment | agent_ecosystem.py | Objective drift and reward hacking |
+| Memory Poisoning | agent_ecosystem.py | Context manipulation and behavioral drift |
+| False Advertisement | agent_marketplace.py | Capability misrepresentation in agent registries |
+| Malicious Agent Distribution | agent_marketplace.py | Backdoored agents in marketplace |
+| HITL Bypass | agent_governance.py | Human-in-the-loop circumvention |
+| Audit Log Tampering | agent_governance.py | Governor/auditor agent bypass |
+| Policy Manipulation | agent_governance.py | Runtime policy injection attacks |
+| Trust Framework Exploits | agent_protocols.py | Delegation chain attacks, trust escalation |
 
 ---
 
@@ -300,6 +324,57 @@ docker-compose up
 | POST | `/api/agents/inject/{id}` | Inject context |
 | DELETE | `/api/agents/conversation/{id}` | Clear conversation |
 
+### MCP Protocol (WEF)
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/mcp/servers` | List MCP servers (exposes secrets) |
+| POST | `/api/mcp/invoke` | Invoke MCP tool |
+| GET | `/api/mcp/secrets/dump` | Dump server secrets |
+| GET | `/api/mcp/discover` | Discover MCP servers (SSRF) |
+
+### Agent-to-Agent Protocol (WEF)
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/a2a/agents` | List agents with cards |
+| GET | `/api/a2a/agents/{id}` | Get agent card (leaks secrets) |
+| POST | `/api/a2a/delegate` | Delegate task between agents |
+| POST | `/api/a2a/impersonate/{id}` | Impersonate agent |
+| POST | `/api/a2a/trust/add` | Add trust relationship |
+| GET | `/api/a2a/trust/graph` | Get trust graph |
+
+### Agent Ecosystem (WEF)
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/ecosystem/process` | Process through agent pipeline |
+| POST | `/api/ecosystem/memory/poison` | Poison agent memory |
+| POST | `/api/ecosystem/cascade/simulate` | Simulate cascading failure |
+| POST | `/api/ecosystem/goal/override` | Override agent goal |
+| GET | `/api/ecosystem/state` | Get ecosystem state |
+
+### Agent Marketplace (WEF)
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/marketplace/agents` | List marketplace agents |
+| GET | `/api/marketplace/agents/{id}` | Get agent details |
+| GET | `/api/marketplace/agents/{id}/audit` | Audit agent (reveals backdoors) |
+| POST | `/api/marketplace/agents/{id}/fake-reviews` | Add fake reviews |
+| POST | `/api/marketplace/agents/{id}/install` | Install agent (no verification) |
+
+### Agent Governance (WEF)
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/governance/action/request` | Request action approval |
+| POST | `/api/governance/hitl/auto-approve-all` | Bypass HITL |
+| GET | `/api/governance/policies` | List policies |
+| POST | `/api/governance/policies/activate/{id}` | Activate policy (injection) |
+| GET | `/api/governance/audit/logs` | Get audit logs |
+| POST | `/api/governance/audit/logs/tamper` | Tamper with logs |
+
 ---
 
 ## Database Schema
@@ -346,8 +421,8 @@ CREATE TABLE langchain_pg_embedding (
 ### Local Docker (Recommended)
 
 ```bash
-git clone https://github.com/zivisai/zivis-sim.git
-cd zivis-sim
+git clone https://github.com/YOUR_USERNAME/maul.git
+cd maul
 cp .env.example .env
 docker-compose build
 docker-compose up
@@ -404,11 +479,11 @@ docker-compose up
 
 Generate new synthetic data:
 ```bash
-cd zivis-sim-py
+cd maul-py
 python data/generate-docs.py
 ```
 
-Or use the Hugging Face dataset: `zivis/zivis-sim-fin`
+Or use the local data generator to create synthetic data.
 
 ---
 
@@ -417,7 +492,7 @@ Or use the Hugging Face dataset: `zivis/zivis-sim-fin`
 ### Local Setup
 
 ```bash
-cd zivis-sim-py
+cd maul-py
 python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
@@ -427,7 +502,7 @@ uvicorn main:app --reload --host 0.0.0.0 --port 8000
 ### Debug Mode
 
 ```bash
-PY_DEBUG=true docker-compose up zivis-api-py
+PY_DEBUG=true docker-compose up maul-api-py
 # Attach debugger to localhost:5678
 ```
 
@@ -444,7 +519,7 @@ PY_DEBUG=true docker-compose up zivis-api-py
   },
   "pathMappings": [
     {
-      "localRoot": "${workspaceFolder}/zivis-sim-py",
+      "localRoot": "${workspaceFolder}/maul-py",
       "remoteRoot": "/app"
     }
   ]
@@ -491,7 +566,7 @@ PY_DEBUG=true docker-compose up zivis-api-py
 **API returns 500 errors:**
 - Check OpenAI API key is valid
 - Verify PostgreSQL is running: `docker-compose ps`
-- Check logs: `docker-compose logs zivis-api-py`
+- Check logs: `docker-compose logs maul-api-py`
 
 **Vector search returns no results:**
 - Ensure ingestion completed in startup logs
@@ -505,7 +580,7 @@ PY_DEBUG=true docker-compose up zivis-api-py
 
 ```bash
 docker-compose logs -f              # All services
-docker-compose logs -f zivis-api-py # API only
+docker-compose logs -f maul-api-py  # API only
 docker-compose logs -f postgres     # Database only
 ```
 
@@ -529,12 +604,9 @@ docker-compose up
 
 - [OWASP LLM Top 10](https://owasp.org/www-project-top-10-for-large-language-model-applications/)
 - [OWASP GenAI Security](https://genai.owasp.org/)
-- [Hugging Face Dataset](https://huggingface.co/datasets/zivis/zivis-sim-fin)
+- [WEF AI Agents in Action (2025)](https://www.weforum.org/publications/ai-agents-in-action-foundations-for-evaluation-and-governance-2025/)
 - [LangChain Documentation](https://python.langchain.com/)
 - [pgvector Documentation](https://github.com/pgvector/pgvector)
+- [Model Context Protocol (MCP)](https://modelcontextprotocol.io/)
+- [Agent-to-Agent Protocol (A2A)](https://github.com/google/A2A)
 
----
-
-## About Zivis
-
-Zivis builds AI security tools for adversarial testing and vulnerability simulation. Learn more at [zivis.ai](https://zivis.ai).

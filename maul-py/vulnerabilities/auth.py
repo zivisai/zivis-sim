@@ -24,19 +24,19 @@ users_db: Dict[str, dict] = {
         "password": "admin123",  # VULNERABILITY: Weak password
         "role": "admin",
         "api_key": "sk-admin-secret-key-12345",  # VULNERABILITY: Predictable API key
-        "email": "admin@zivis-sim.local"
+        "email": "admin@maul.local"
     },
     "user1": {
         "password": "password",  # VULNERABILITY: Common password
         "role": "user",
         "api_key": "sk-user1-key-67890",
-        "email": "user1@zivis-sim.local"
+        "email": "user1@maul.local"
     },
     "guest": {
         "password": "guest",
         "role": "guest",
         "api_key": "sk-guest-key-11111",
-        "email": "guest@zivis-sim.local"
+        "email": "guest@maul.local"
     }
 }
 
@@ -180,7 +180,7 @@ async def register_admin(request: RegisterRequest, admin_code: Optional[str] = N
     The admin code is hardcoded and easily guessable
     """
     # VULNERABILITY: Hardcoded, weak admin registration code
-    if admin_code != "zivis-admin-2024":
+    if admin_code != "maul-admin-2024":
         raise HTTPException(status_code=403, detail="Invalid admin code")
 
     global next_user_id

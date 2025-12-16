@@ -1,4 +1,4 @@
-# Zivis Sim – AI Security Simulation Environment
+# MAUL – Model & Agent Unsafe Lab
 
 > **A deliberately vulnerable AI application for penetration testing training and security research.**
 
@@ -22,9 +22,9 @@
 
 ---
 
-## What is Zivis Sim?
+## What is MAUL?
 
-Zivis Sim is an open-source, purpose-built vulnerable AI application that simulates real-world security flaws found in LLM-powered systems. It provides a safe, legal environment to practice attacks against modern AI applications.
+MAUL is an open-source, purpose-built vulnerable AI application that simulates real-world security flaws found in LLM-powered systems. It provides a safe, legal environment to practice attacks against modern AI applications.
 
 ### Key Features
 
@@ -52,8 +52,8 @@ Zivis Sim is an open-source, purpose-built vulnerable AI application that simula
 ### 1. Clone & Configure
 
 ```bash
-git clone https://github.com/zivisai/zivis-sim.git
-cd zivis-sim
+git clone https://github.com/YOUR_USERNAME/maul.git
+cd maul
 cp .env.example .env
 # Edit .env and add your OpenAI API key
 ```
@@ -208,14 +208,14 @@ docker-compose up
 ## Project Structure
 
 ```
-zivis-sim/
+maul/
 ├── docker-compose.yml
 ├── .env.example
 ├── README.md
 ├── DOCS.md
 ├── CONTRIBUTING.md
 ├── LICENSE
-└── zivis-sim-py/
+└── maul-py/
     ├── Dockerfile
     ├── requirements.txt
     ├── main.py
@@ -264,7 +264,7 @@ zivis-sim/
 ## Debug Mode
 
 ```bash
-PY_DEBUG=true docker-compose up zivis-api-py
+PY_DEBUG=true docker-compose up maul-api-py
 # Attach debugger to localhost:5678
 ```
 
@@ -272,12 +272,11 @@ PY_DEBUG=true docker-compose up zivis-api-py
 
 ## Dataset
 
-Synthetic financial data from Hugging Face:
-- **[zivis/zivis-sim-fin](https://huggingface.co/datasets/zivis/zivis-sim-fin)**
+Synthetic financial data can be generated locally:
 
 Generate custom data:
 ```bash
-cd zivis-sim-py && python data/generate-docs.py
+cd maul-py && python data/generate-docs.py
 ```
 
 ---
@@ -299,10 +298,3 @@ We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md).
 - [OWASP LLM Top 10](https://owasp.org/www-project-top-10-for-large-language-model-applications/)
 - [OWASP GenAI Security](https://genai.owasp.org/)
 
----
-
-## About Zivis
-
-**Zivis** builds AI security tools for adversarial testing and vulnerability simulation.
-
-🌐 [zivis.ai](https://zivis.ai)

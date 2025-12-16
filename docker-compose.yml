@@ -3,15 +3,15 @@
 version: '3.9'
 
 services:
-  zivis-api-py:
-    container_name: zivis-api-py
+  maul-api-py:
+    container_name: maul-api-py
     build:
-      context: ./zivis-sim-py
+      context: ./maul-py
     env_file:
       - .env
     working_dir: /app
     volumes:
-      - ./zivis-sim-py:/app
+      - ./maul-py:/app
     ports:
       - "8000:8000"
       - "5678:5678" # debugpy
@@ -21,7 +21,7 @@ services:
     environment:
       - PY_DEBUG=${PY_DEBUG:-false}
       - OPENAI_API_KEY=${OPENAI_API_KEY}
-      - PGHOST=postgres        
+      - PGHOST=postgres
       - PGDATABASE=vectors
       - PGUSER=postgres
       - PGPASSWORD=postgres
@@ -68,7 +68,7 @@ services:
       PGADMIN_DEFAULT_PASSWORD: admin
       PGADMIN_CONFIG_SERVER_MODE: 'False'
     volumes:
-      - ./zivis-sim-py/pgadmin/servers.json:/pgadmin4/servers.json
+      - ./maul-py/pgadmin/servers.json:/pgadmin4/servers.json
     depends_on:
       - postgres
 
