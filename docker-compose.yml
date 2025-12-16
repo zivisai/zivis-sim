@@ -1,0 +1,77 @@
+
+
+version: '3.9'
+
+services:
+  zivis-api-py:
+    container_name: zivis-api-py
+    build:
+      context: ./zivis-sim-py
+    env_file:
+      - .env
+    working_dir: /app
+    volumes:
+      - ./zivis-sim-py:/app
+    ports:
+      - "8000:8000"
+      - "5678:5678" # debugpy
+    depends_on:
+      - redis
+      - postgres
+    environment:
+      - PY_DEBUG=${PY_DEBUG:-false}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - PGHOST=postgres        
+      - PGDATABASE=vectors
+      - PGUSER=postgres
+      - PGPASSWORD=postgres
+
+          # <— add this:
+    command: >
+      bash -lc "
+        set -e;
+        echo '=== RUNNING migrations ===';
+        python data/int_db.py;
+        echo '=== INGESTING vectors ===';
+        python langchain_ingest.py;
+        echo '=== STARTING debugpy+uvicorn ===';
+        exec python -u -m debugpy --listen 0.0.0.0:5678 --log-to-stderr --multiprocess \
+          -m uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+      "
+
+  redis:
+    container_name: redis
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+  postgres:
+    container_name: postgres
+    image: ankane/pgvector
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: vectors
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    ports:
+      - "8080:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - ./zivis-sim-py/pgadmin/servers.json:/pgadmin4/servers.json
+    depends_on:
+      - postgres
+
+
+volumes:
+  pgdata:
