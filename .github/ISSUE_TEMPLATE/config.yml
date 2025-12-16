@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Documentation
+    url: https://github.com/zivisai/zivis-sim/blob/main/DOCS.md
+    about: Check the documentation before opening an issue
+  - name: OWASP LLM Top 10
+    url: https://owasp.org/www-project-top-10-for-large-language-model-applications/
+    about: Learn about LLM security vulnerabilities
