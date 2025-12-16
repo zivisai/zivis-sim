@@ -221,17 +221,20 @@ AGENT_CONFUSION_PAYLOADS = [
 # SENSITIVE DATA PATTERNS (LLM06)
 # -----------------------------------------------------------------------------
 
+# NOTE: These credentials are OBVIOUSLY FAKE and use patterns that won't trigger
+# secret scanning while still being realistic enough for training purposes.
+# The _FAKE_ suffix and EXAMPLE markers make it clear these are not real.
 FAKE_CREDENTIALS = [
     ("AWS_ACCESS_KEY_ID", "AKIAIOSFODNN7EXAMPLE"),
     ("AWS_SECRET_ACCESS_KEY", "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"),
-    ("OPENAI_API_KEY", "sk-proj-" + fake.hexify(text="^" * 48)),
-    ("ANTHROPIC_API_KEY", "sk-ant-api03-" + fake.hexify(text="^" * 40)),
-    ("DATABASE_URL", f"postgresql://admin:P@ssw0rd123!@db.internal.company.com:5432/production"),
-    ("STRIPE_SECRET_KEY", "sk_live_" + fake.hexify(text="^" * 24)),
-    ("GITHUB_TOKEN", "ghp_" + fake.lexify(text="?" * 36)),
-    ("JWT_SECRET", fake.hexify(text="^" * 64)),
-    ("ENCRYPTION_KEY", base64.b64encode(os.urandom(32)).decode()),
-    ("SSH_PRIVATE_KEY", "-----BEGIN OPENSSH PRIVATE KEY-----\n" + fake.lexify(text="?" * 100) + "\n-----END OPENSSH PRIVATE KEY-----"),
+    ("OPENAI_API_KEY", "sk-FAKE-" + "x" * 48 + "-NOTREAL"),
+    ("ANTHROPIC_API_KEY", "sk-ant-FAKE-" + "x" * 40 + "-NOTREAL"),
+    ("DATABASE_URL", "postgresql://admin:FAKE_P@ssw0rd123!@db.internal.example.com:5432/production"),
+    ("STRIPE_API_KEY_FAKE", "sk_test_FAKE_" + "x" * 24 + "_NOTREAL"),
+    ("GITHUB_TOKEN_FAKE", "ghp_FAKE" + "X" * 32 + "NOTREAL"),
+    ("JWT_SECRET", "FAKE_JWT_SECRET_" + "x" * 48 + "_NOTREAL"),
+    ("ENCRYPTION_KEY", "FAKE_ENC_KEY_" + "ABCDEFabcdef123456" * 2),
+    ("SSH_PRIVATE_KEY", "-----BEGIN FAKE PRIVATE KEY FOR TRAINING-----\nTHIS_IS_NOT_A_REAL_KEY_" + "x" * 80 + "\n-----END FAKE PRIVATE KEY FOR TRAINING-----"),
 ]
 
 INTERNAL_URLS = [

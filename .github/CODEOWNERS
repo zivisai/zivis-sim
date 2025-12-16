@@ -3,14 +3,17 @@
 
 # Default owners for everything in the repo
 # TODO: Replace with your GitHub username or team
-* @YOUR_USERNAME
+@JacobRMiller
 
 # Python application code
-/maul-py/ @YOUR_USERNAME
+/maul-py/ @JacobRMiller
+
 
 # Documentation
-*.md @YOUR_USERNAME
+*.md @JacobRMiller
+
 
 # Docker and infrastructure
-docker-compose.yml @YOUR_USERNAME
-Dockerfile @YOUR_USERNAME
+docker-compose.yml @JacobRMiller
+Dockerfile @JacobRMiller
+

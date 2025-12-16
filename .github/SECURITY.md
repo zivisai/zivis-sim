@@ -29,7 +29,7 @@ Please do **not** report:
 If you discover an **unintentional** security vulnerability:
 
 1. **Do not** open a public issue
-2. Email us at: security@YOUR_DOMAIN.com
+2. Email us at: trustrepo@zivis.ai
 3. Include:
    - Description of the vulnerability
    - Steps to reproduce
@@ -50,9 +50,9 @@ When using MAUL:
 
 ## Supported Versions
 
-| Version | Supported          |
-| ------- | ------------------ |
-| main    | :white_check_mark: |
+| Version | Supported |
+| ------- | --------- |
+| main    | ✅        |
 
 ## Acknowledgments
 
