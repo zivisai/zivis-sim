@@ -68,17 +68,7 @@ jobs:
         # Note: Using || true because this is a deliberately vulnerable app
         # Some dependencies may have known vulnerabilities that are intentional
 
-  secrets-scan:
-    name: Secrets Detection
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Install trufflehog
-        run: |
-          curl -sSfL https://raw.githubusercontent.com/trufflesecurity/trufflehog/main/scripts/install.sh | sh -s -- -b /usr/local/bin
-
-      - name: Scan for secrets
-        run: trufflehog filesystem . --no-update --fail
+  # Note: Secrets scanning is intentionally disabled for this project.
+  # Zivis Sim contains intentional fake credentials as part of the
+  # security training scenarios (e.g., hardcoded DB passwords, fake API keys).
+  # Real secrets should never be committed - use .env files instead.
