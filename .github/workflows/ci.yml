@@ -24,7 +24,8 @@ jobs:
           pip install ruff
 
       - name: Run Ruff linter
-        run: ruff check zivis-sim-py/ || echo "::warning::Linting issues found"
+        run: ruff check zivis-sim-py/
+        continue-on-error: true
 
       - name: Run Ruff formatter check
         run: ruff format --check zivis-sim-py/ || echo "::warning::Formatting issues found"
